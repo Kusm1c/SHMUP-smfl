@@ -1,3 +1,4 @@
+#include <iostream>
 #include <SFML/Graphics.hpp>
 
 
@@ -25,9 +26,22 @@ void movePlayerShip(sf::Sprite* sprite)
 	}
 }
 
+void updateBackground(sf::Sprite* sprite, sf::Sprite* sprite2, float sizeHeight)
+{
+	sprite->move(-0.01, 0);
+	sprite2->move(-0.01, 0);
+	if (sprite->getPosition().x < -sizeHeight)
+	{
+		sprite->setPosition(sprite2->getPosition().x + sizeHeight, 0);
+	}
+	else if (sprite2->getPosition().x < -sizeHeight)
+	{
+		sprite2->setPosition(sprite->getPosition().x + sizeHeight, 0);
+	}
+}
+
 int main()
 {
-
 	//AllSprites address
 	sf::Sprite* allSprites[100];
 
@@ -35,7 +49,7 @@ int main()
 	//Player Ship
 	sf::Texture playerShipTexture;
 
-	if (!playerShipTexture.loadFromFile("PlayerShip.png"))
+	if (!playerShipTexture.loadFromFile("img/PlayerShip.png"))
 	{
 		return 1;
 	}
@@ -51,7 +65,7 @@ int main()
 	//Background
 	sf::Texture backgroundTexture;
 
-	if (!backgroundTexture.loadFromFile("Background.png"))
+	if (!backgroundTexture.loadFromFile("img/Background.png"))
 	{
 		return 1;
 	}
@@ -66,8 +80,19 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(width, height), "SFML works!");
 	playerShipSprite.setPosition(window.getSize().x / 4, window.getSize().y / 2);
 
+	//Second Background
+	sf::Texture backgroundTexture2;
 
-
+	if (!backgroundTexture2.loadFromFile("img/Background.png"))
+	{
+		return 1;
+	}
+	backgroundWidth = backgroundTexture2.getSize().x;
+	backgroundHeight = backgroundTexture2.getSize().y;
+	sf::Sprite backgroundSprite2;
+	backgroundSprite2.setTexture(backgroundTexture2);
+	backgroundSprite2.setPosition(backgroundHeight, 0);
+	allSprites[2] = &backgroundSprite2;
 
 	while (window.isOpen())
 	{
@@ -79,8 +104,10 @@ int main()
 		}
 
 		window.clear();
-		window.draw(backgroundSprite);
+		updateBackground(&backgroundSprite, &backgroundSprite2, backgroundHeight);
 		movePlayerShip(&playerShipSprite);
+		window.draw(backgroundSprite);
+		window.draw(backgroundSprite2);
 		window.draw(playerShipSprite);
 		window.display();
 	}
