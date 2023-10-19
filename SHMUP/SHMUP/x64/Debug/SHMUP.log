@@ -1,0 +1,18 @@
+﻿  SHMUP.cpp
+C:\Users\d.harle\source\repos\SHMUP\SHMUP\SHMUP.cpp(8,17): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\d.harle\source\repos\SHMUP\SHMUP\SHMUP.cpp(13,16): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\d.harle\source\repos\SHMUP\SHMUP\SHMUP.cpp(18,20): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\d.harle\source\repos\SHMUP\SHMUP\SHMUP.cpp(23,19): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\d.harle\source\repos\SHMUP\SHMUP\SHMUP.cpp(45,47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\d.harle\source\repos\SHMUP\SHMUP\SHMUP.cpp(45,35): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\d.harle\source\repos\SHMUP\SHMUP\SHMUP.cpp(67,74): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+C:\Users\d.harle\source\repos\SHMUP\SHMUP\SHMUP.cpp(67,50): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+  SHMUP.vcxproj -> C:\Users\d.harle\source\repos\SHMUP\x64\Debug\SHMUP.exe
