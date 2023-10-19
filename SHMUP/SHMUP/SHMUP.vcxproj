@@ -141,7 +141,17 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="BackGround.png" />
+    <Image Include="img\asteroid.png" />
+    <Image Include="img\BackGround.png" />
+    <Image Include="img\cruiser.png" />
+    <Image Include="img\PlayerShip.png" />
     <Image Include="PlayerShip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SHMUP.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
