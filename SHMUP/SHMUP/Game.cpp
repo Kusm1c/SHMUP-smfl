@@ -23,7 +23,7 @@ Game::Game() : window(sf::VideoMode(800, 500), "SFML Game") {
 
     // Initialize the pool of bullets.
     for (int i = 0; i < 100; i++) {
-        bullets.push_back(Bullet(bulletTexture, 0, 0, false));
+        bullets.push_back(Bullet(bulletTexture, -800, -800, false));
     }
 
     //make 2 backgrounds
@@ -100,6 +100,7 @@ void Game::update() {
     for (auto& enemy : enemies) {
         enemy.update();
     }
+    handleCollisions();
     updateBackground(&backgroundSprite, &backgroundSprite2, 1500);
     spawnEnemy();
 }
