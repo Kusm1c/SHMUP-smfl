@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Game.h"
+#include <memory>
 
 using namespace std;
 

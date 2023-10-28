@@ -1,88 +1,84 @@
 #include "Game.h"
-
-#include <SFML/Window/Event.hpp>
-#include <SFML/Window/VideoMode.hpp>
-
-#include "Player.h"
-#include "Bullet.h"
-#include "Enemy.h"
-
+#include <SFML/Graphics.hpp>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
 
 Game::Game() : window(sf::VideoMode(800, 500), "SFML Game") {
     // Load textures for player, bullet, and enemy.
     playerTexture.loadFromFile("img/PlayerShip.png");
     bulletTexture.loadFromFile("img/Bullet.png");
     enemyTexture.loadFromFile("img/cruiser.png");
+    backgroundTexture.loadFromFile("img/BackGround.png");
 
     // Initialize player.
     player = Player(playerTexture, 400, 300);
 
     // Initialize Bullet and Enemy vectors.
-    bullets = std::vector<Bullet>();
-    enemies = std::vector<Enemy>();
+    bullets.reserve(100);
+    enemies.reserve(100);
 
     // Initialize the pool of bullets.
     for (int i = 0; i < 100; i++) {
-        bullets.push_back(Bullet(bulletTexture, -800, -800, false));
+        bullets.emplace_back(bulletTexture, -800, -800, false);
     }
 
-    //make 2 backgrounds
-    backgroundTexture.loadFromFile("img/BackGround.png");
-    backgroundSprite.setTexture(backgroundTexture);
-    backgroundSprite.setPosition(0, 0);
-    backgroundSprite2.setTexture(backgroundTexture);
-    backgroundSprite2.setPosition(800, 0);
+    // Initialize background sprites.
+    backgroundSprites.resize(2);
+    for (int i = 0; i < 2; ++i) {s
+        backgroundSprites[i].setTexture(backgroundTexture);
+        backgroundSprites[i].setPosition(800 * i, 0);
+    }
+
+    // Seed for random number generation.
+    std::srand(std::time(0));
 }
 
-void Game::handleCollisions()
-{
-    // Handle collisions between player, bullets, and enemies.
-    // If a collision occurs, set the active flag to false. If the player is hit, end the game.
+void Game::handleCollisions() {
     for (auto& bullet : bullets) {
         if (bullet.isActive()) {
             for (auto& enemy : enemies) {
-                if (enemy.isActive()) {
-                    if (bullet.getGlobalBounds().intersects(enemy.getGlobalBounds())) {
-                        bullet.setActive(false);
-                        enemy.setActive(false);
-                    }
+                if (enemy.isActive() && bullet.getGlobalBounds().intersects(enemy.getGlobalBounds())) {
+                    bullet.setActive(false);
+                    enemy.setActive(false);
                 }
             }
         }
     }
+
     for (auto& enemy : enemies) {
-        if (enemy.isActive()) {
-            if (player.getGlobalBounds().intersects(enemy.getGlobalBounds())) {
-                window.close();
-            }
+        if (enemy.isActive() && player.getGlobalBounds().intersects(enemy.getGlobalBounds())) {
+            window.close();
         }
     }
 }
 
 void Game::handleInput() {
     // Handle user input, update player position, and fire bullets.
+    sf::Vector2f movement(0, 0);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
-        player.move(sf::Vector2f(0, -1));
+        movement.y -= 1;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-        player.move(sf::Vector2f(-1, 0));
+        movement.x -= 1;
         player.setRotation(270);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-        player.move(sf::Vector2f(0, 1));
+        movement.y += 1;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        player.move(sf::Vector2f(1, 0));
+        movement.x += 1;
         player.setRotation(90);
     }
 
-    // when space is pressed, fire only one bullet per press
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-    {
-        if (frameCounter % 500 == 0) {
+    player.move(movement);
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+        if (bulletCooldownClock.getElapsedTime().asMilliseconds() >= 500) {
             for (auto& bullet : bullets) {
                 if (!bullet.isActive()) {
                     bullet = Bullet(bulletTexture, player.getGlobalBounds().left + player.getGlobalBounds().width, player.getGlobalBounds().top + player.getGlobalBounds().height / 2, false);
+                    bulletCooldownClock.restart(); // Reset the cooldown timer
                     break;
                 }
             }
@@ -91,8 +87,6 @@ void Game::handleInput() {
 }
 
 void Game::update() {
-    // Update player, bullets, enemies, handle collisions, etc.
-    // Spawn new enemies based on game logic.
     player.update();
     for (auto& bullet : bullets) {
         bullet.update();
@@ -101,35 +95,36 @@ void Game::update() {
         enemy.update();
     }
     handleCollisions();
-    updateBackground(&backgroundSprite, &backgroundSprite2, 1500);
+    updateBackground();
     spawnEnemy();
 }
 
 void Game::render() {
     window.clear();
-    update();
-
-    window.draw(backgroundSprite);
-    window.draw(backgroundSprite2);
-
-    // Render player, bullets, enemies, background, UI, etc.
+    window.draw(backgroundSprites[0]);
+    window.draw(backgroundSprites[1]);
     player.draw(window);
-
     for (auto& bullet : bullets) {
         bullet.draw(window);
     }
-
     for (auto& enemy : enemies) {
         enemy.draw(window);
     }
-
     window.display();
 }
 
+void Game::updateBackground() {
+    for (auto& sprite : backgroundSprites) {
+        sprite.move(-0.01, 0);
+        if (sprite.getPosition().x < -800) {
+            sprite.setPosition(800, 0);
+        }
+    }
+}
+
 void Game::spawnEnemy() {
-    // Logic to spawn enemies based on game conditions.
-    if (frameCounter % 100 == 0) {
-        enemies.push_back(Enemy(enemyTexture, 800, rand() % 600, true));
+    if (frameCounter % 1000 == 0) {
+        enemies.emplace_back(enemyTexture, 800, rand() % 600, true);
     }
     frameCounter++;
 }
@@ -142,22 +137,9 @@ void Game::run() {
                 window.close();
             }
         }
-
         handleInput();
+        update();
         render();
     }
 }
 
-void Game::updateBackground(sf::Sprite* sprite, sf::Sprite* sprite2, float sizeHeight)
-{
-    sprite->move(-0.01, 0);
-    sprite2->move(-0.01, 0);
-    if (sprite->getPosition().x < -sizeHeight)
-    {
-        sprite->setPosition(sprite2->getPosition().x + sizeHeight, 0);
-    }
-    else if (sprite2->getPosition().x < -sizeHeight)
-    {
-        sprite2->setPosition(sprite->getPosition().x + sizeHeight, 0);
-    }
-}

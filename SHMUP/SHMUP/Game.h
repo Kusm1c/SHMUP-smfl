@@ -20,8 +20,8 @@ private:
     sf::Texture bulletTexture;
     sf::Texture enemyTexture;
     sf::Texture backgroundTexture;
-    sf::Sprite backgroundSprite;
-    sf::Sprite backgroundSprite2;
+    std::vector<sf::Sprite> backgroundSprites;
+    sf::Clock bulletCooldownClock;
     void handleCollisions();
 
     int frameCounter = 0;
@@ -31,4 +31,5 @@ private:
     void render();
     void spawnEnemy();
     static void updateBackground(sf::Sprite* sprite, sf::Sprite* sprite2, float sizeHeight);
+    void updateBackground();
 };
