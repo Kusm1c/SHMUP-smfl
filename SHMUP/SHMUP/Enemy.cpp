@@ -12,10 +12,10 @@ Enemy::Enemy(sf::Texture& texture, float startX, float startY, bool canShoot) : 
 
 void Enemy::update() {
     if (active) {
-        // Move the enemy.
+        
         sprite.move(-velocity, 0);
 
-        // Additional update logic, such as handling shooting timer or checking boundaries.
+        
         if (canShootFlag) {
             shootTimer++;
             //spawn bullet with negative velocity and isEnemy flag

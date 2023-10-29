@@ -4,7 +4,7 @@
 #include <SFML/Graphics/Texture.hpp>
 
 Player::Player() : velocity(0.1f) {
-    // Default constructor, not used.
+    
 }
 
 Player::Player(sf::Texture& texture, float startX, float startY) : velocity(0.1f) {
@@ -18,7 +18,7 @@ void Player::move(sf::Vector2f direction) {
 }
 
 void Player::update() {
-    // Additional update logic specific to the player, if needed.
+    
 }
 
 void Player::draw(sf::RenderWindow& window) {
@@ -32,4 +32,9 @@ void Player::setRotation(float angle)
 
 sf::FloatRect Player::getGlobalBounds() {
     return sprite.getGlobalBounds();
+}
+
+void Player::setPosition(float x, float y)
+{
+    sprite.setPosition(x, y);
 }

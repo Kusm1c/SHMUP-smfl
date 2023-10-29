@@ -9,7 +9,7 @@ Bullet::Bullet(sf::Texture& texture, float startX, float startY, bool isEnemy) :
     sprite.setPosition(startX, startY);
 
     if (isEnemy) {
-        // Set specific properties for enemy bullets if needed.
+        
     }
 }
 
@@ -20,9 +20,9 @@ Bullet::Bullet(const sf::Texture* texture, float x, float y, bool cond)
 
 void Bullet::update() {
     if (active) {
-        // Move the bullet.
+        
         sprite.move(velocity, 0);
-        // Additional update logic, such as checking boundaries or handling collisions.
+        
         if (sprite.getPosition().x > 800) {
             active = false;
         }

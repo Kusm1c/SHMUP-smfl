@@ -11,6 +11,7 @@ public:
     void draw(sf::RenderWindow& window);
     void setRotation(float angle);
     sf::FloatRect getGlobalBounds();
+    void setPosition(float x, float y);
 
 private:
     sf::Sprite sprite;

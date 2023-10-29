@@ -138,10 +138,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="CountDown.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameOver.cpp" />
+    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="InGame.cpp" />
+    <ClCompile Include="LeaderBoard.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SHMUP.cpp" />
+    <ClCompile Include="TitleScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="img\asteroid.png" />
@@ -153,11 +159,32 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SHMUP.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Font\Raleway-Black.ttf" />
+    <Content Include="Font\Raleway-BlackItalic.ttf" />
+    <Content Include="Font\Raleway-Bold.ttf" />
+    <Content Include="Font\Raleway-BoldItalic.ttf" />
+    <Content Include="Font\Raleway-ExtraBold.ttf" />
+    <Content Include="Font\Raleway-ExtraBoldItalic.ttf" />
+    <Content Include="Font\Raleway-ExtraLight.ttf" />
+    <Content Include="Font\Raleway-ExtraLightItalic.ttf" />
+    <Content Include="Font\Raleway-Italic.ttf" />
+    <Content Include="Font\Raleway-Light.ttf" />
+    <Content Include="Font\Raleway-LightItalic.ttf" />
+    <Content Include="Font\Raleway-Medium.ttf" />
+    <Content Include="Font\Raleway-MediumItalic.ttf" />
+    <Content Include="Font\Raleway-Regular.ttf" />
+    <Content Include="Font\Raleway-SemiBold.ttf" />
+    <Content Include="Font\Raleway-SemiBoldItalic.ttf" />
+    <Content Include="Font\Raleway-Thin.ttf" />
+    <Content Include="Font\Raleway-ThinItalic.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
