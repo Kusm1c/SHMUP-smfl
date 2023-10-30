@@ -41,7 +41,7 @@ void Game::renderTitleScreen() {
     
     
     font.loadFromFile("Font/Raleway-Medium.ttf"); 
-    sf::Text titleText("Your Game Title", font, 48);
+    sf::Text titleText("Le shmup en cpp là", font, 48);
     titleText.setFillColor(sf::Color::White);
     titleText.setPosition(200, 50); 
     window.draw(titleText);
