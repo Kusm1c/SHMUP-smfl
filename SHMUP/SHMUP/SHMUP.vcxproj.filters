@@ -30,6 +30,24 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CountDown.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LeaderBoard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="img\asteroid.png">
@@ -59,6 +77,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

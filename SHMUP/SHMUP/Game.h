@@ -14,10 +14,14 @@ class Game {
 public:
     Game();
     void run();
-
+    std::vector<sf::Texture> getExplosionTextures();
+    sf::RenderWindow* getWindow();
 private:
     // Member variables
 
+    void loadExplosionTextures();
+    std::vector<sf::Texture> loadBackgroundTextures(int path_to_background);
+    void setBulletsAndEnemiesAndBackGround();
     // Initialization functions
     void handleInput();
     void handleTitleScreenInput();
@@ -32,6 +36,8 @@ private:
     void updateBackground();
     void resetGame();
 
+    void drawBackground();
+    int drawCurrentScore();
     // Rendering functions
     void renderPlaying();
     void renderTitleScreen();
@@ -46,13 +52,13 @@ private:
 
     // Member variables
     GameStateManager stateManager;
-    sf::RenderWindow window;
     Player player;
     std::vector<Bullet> bullets;
     std::vector<Enemy> enemies;
     sf::Texture playerTexture;
     sf::Texture bulletTexture;
     sf::Texture enemyTexture;
+    sf::Texture asteroidTexture;
     sf::Texture backgroundTexture;
     std::vector<sf::Sprite> backgroundSprites;
     sf::Clock bulletCooldownClock;
@@ -61,6 +67,12 @@ private:
     sf::Text scoreText;
     int currentScore;
     std::vector<int> leaderboardScores;
+    std::vector<std::string> pathToBackgrounds;
+    std::vector<int> numberOfFilesInDirectory;
+    std::vector<sf::Texture> choosenBackgroundTextures;
+    std::vector<sf::Sprite> choosenBackgroundSprites;
+    std::vector<sf::Texture> explosionTextures;
+    sf::RenderWindow window;
     
     sf::Vector2f startButtonPosition;
     sf::Vector2f startButtonSize;

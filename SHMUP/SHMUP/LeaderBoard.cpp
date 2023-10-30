@@ -51,7 +51,7 @@ void Game::renderLeaderboard() {
 
     
     std::vector<sf::Text> leaderboardEntries;
-    for (size_t i = 0; i < leaderboardScores.size(); ++i) {
+    for (size_t i = 0; i < 10; ++i) {
         sf::Text entryText(std::to_string(i + 1) + ". " + std::to_string(leaderboardScores[i]), font, 24);
         entryText.setFillColor(sf::Color::White);
         entryText.setPosition(250, 100 + i * 40); 

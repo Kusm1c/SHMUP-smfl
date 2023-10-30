@@ -4,19 +4,22 @@
 
 class Enemy {
 public:
-    Enemy(sf::Texture& texture, float startX, float startY, bool canShoot);
+    Enemy(sf::Texture& texture, float startX, float startY, bool isDestructible);
     void update();
     void draw(sf::RenderWindow& window);
     bool isActive() const;
-    bool canShoot() const;
+    bool canBeDestroyed() const;
     sf::FloatRect getGlobalBounds();
     void setActive(bool cond);
+    void setVelocity(float velocity);
 
 private:
     sf::Sprite sprite;
     bool active;
     float velocity;
-    bool canShootFlag;
+    bool isDestructibleFlag;
     float shootTimer;
+    float randomAmplitude;
+    float randomFrequency;
 };
 
