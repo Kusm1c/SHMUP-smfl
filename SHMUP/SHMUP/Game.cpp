@@ -15,7 +15,7 @@ Game::Game() : window(sf::VideoMode(1280, 720), "SFML Game")
 	enemyTexture.loadFromFile("img/cruiser.png");
 	asteroidTexture.loadFromFile("img/asteroid.png");
 	backgroundTexture.loadFromFile("img/game_background_1/game_background_1.png");
-	loadExplosionTextures();
+	//loadExplosionTextures();
 
 	player = Player(playerTexture, 400, 300);
 

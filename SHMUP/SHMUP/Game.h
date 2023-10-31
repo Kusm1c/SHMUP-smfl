@@ -37,7 +37,7 @@ private:
     void resetGame();
 
     void drawBackground();
-    int drawCurrentScore();
+    void drawCurrentScore();
     // Rendering functions
     void renderPlaying();
     void renderTitleScreen();
