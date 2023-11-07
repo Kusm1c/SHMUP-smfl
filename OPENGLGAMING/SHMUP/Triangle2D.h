@@ -12,6 +12,7 @@ public:
 private:
 	GLuint vao;
 	GLuint vbo;
+	GLuint ibo;
 	GLuint shaderVertexProgram;
 	GLuint shaderfragmentProgram;
 	GLuint shaderProgram;
