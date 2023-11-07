@@ -9,27 +9,14 @@ Triangle2D::Triangle2D() : Scene()
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 
-	//GLfloat vertices[] = {
-	//	-0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0, // Vertex 1 (X, Y, Z, R, G, B)
-	//	0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0, // Vertex 2 (X, Y, Z, R, G, B)
-	//	0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0, // Vertex 3 (X, Y, Z, R, G, B)
-
-	//	-0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0, // Vertex 1 (X, Y, Z, R, G, B)
-	//	0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0, // Vertex 3 (X, Y, Z, R, G, B)
-	//	-0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0, // Vertex 4 (X, Y, Z, R, G, B)
-	//};
-	//same as above but make a cube
 	GLfloat vertices[] = {
-		//front
-		-0.5f,	0.5f, 0.5f, 0.0f, 1.0f, 0.0, // Vertex 1 (X, Y, Z, R, G, B)
-		0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0, // Vertex 2 (X, Y, Z, R, G, B)
-		0.5f, -0.5f, 0.5f, 1.0f, 0.0f, 0.0, // Vertex 3 (X, Y, Z, R, G, B)
-		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0, // Vertex 4 (X, Y, Z, R, G, B)
-		//back
-		-0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0, // Vertex 1 (X, Y, Z, R, G, B)
-		0.5f, 0.5f, -0.5f, 0.0f, 0.0f, 1.0, // Vertex 2 (X, Y, Z, R, G, B)
-		0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0, // Vertex 3 (X, Y, Z, R, G, B)
-		-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 1.0, // Vertex 4 (X, Y, Z, R, G, B)
+		-0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0, // Vertex 1 (X, Y, Z, R, G, B)
+		0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0, // Vertex 2 (X, Y, Z, R, G, B)
+		0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0, // Vertex 3 (X, Y, Z, R, G, B)
+
+		-0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0, // Vertex 1 (X, Y, Z, R, G, B)
+		0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0, // Vertex 3 (X, Y, Z, R, G, B)
+		-0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0, // Vertex 4 (X, Y, Z, R, G, B)
 	};
 
 	//GLuint indices[] = {
