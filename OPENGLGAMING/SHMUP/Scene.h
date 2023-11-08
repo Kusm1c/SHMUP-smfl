@@ -27,8 +27,6 @@ protected:
 	GLuint fragmentShader;
 	GLuint shaderProgram;
 	GLint positionAttrib;
-	unsigned int NUM_STRIPS_REQUIRED;
-	unsigned int VERTICES_PER_STRIP;
 
 	unsigned int textureID;
 	glm::mat4 modelMatrix = glm::mat4(1.0f);
