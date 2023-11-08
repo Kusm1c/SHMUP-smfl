@@ -16,7 +16,8 @@ int main()
 	camera.Front = glm::vec3(0.0f, 0.0f, -1.0f);
 	glewExperimental = GL_TRUE;
 	glewInit();
-	auto* triangle = new Triangle2D();
+	/*auto* triangle = new Triangle2D();*/
+	auto* scene = new Scene();
 
 	while (window.isOpen())
 	{
@@ -35,9 +36,10 @@ int main()
 			camera.ProcessKeyboard(LEFT, 0.01f);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 			camera.ProcessKeyboard(RIGHT, 0.01f);
-		triangle->viewMatrix = camera.GetViewMatrix();
-		triangle->display();
-		triangle->Update(0.01f);
+		/*triangle->viewMatrix = camera.GetViewMatrix();
+		triangle->display();*/
+		//triangle->Update(0.01f);
+		scene->display();
 		window.display();
 	}
 

@@ -1,14 +1,10 @@
 #include "Triangle2D.h"
 
-#include <iostream>
-#include <ostream>
-#include <vcruntime.h>
-#include <glm/ext/matrix_clip_space.hpp>
-#include <glm/ext/matrix_transform.hpp>
 
-#include "bmp.h"
 
-#define GLSL(shader) "#version 330 core\n" #shader
+
+
+
 
 Triangle2D::Triangle2D() : Scene()
 {
