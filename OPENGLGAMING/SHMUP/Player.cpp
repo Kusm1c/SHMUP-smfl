@@ -8,6 +8,6 @@ bool Player::checkCollision(const Terrain& terrain) const {
     float z = position.z;
 
     float height = terrain.getHeightOfGroundAtPosition(x, z);
-    std::cout << height << std::endl;
+    std::cout << height << "Player position: " << position.x << " " << position.y << " " << position.z << std::endl;
     return position.y < height;
 }

@@ -16,6 +16,7 @@ public:
     glm::mat4 scaleMatrix = glm::mat4(1.0f);
     glm::mat4 modelMatrix = glm::mat4(1.0f);
     glm::mat4 projectionMatrix = glm::mat4(1.0f);
+    std::vector<int> heights;
 
 private:
     GLuint vao;

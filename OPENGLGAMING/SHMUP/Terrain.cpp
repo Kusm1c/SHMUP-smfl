@@ -40,6 +40,13 @@ Terrain::Terrain()
 		}
 	}
 
+	for (unsigned int i = 0; i < width; i++)
+	{
+		for (unsigned int j = 0; j < height; j++)
+		{
+			heights.push_back(vertices[(j * width + (width - i - 1)) * 8 + 1]);
+		}
+	}
 
 
 	GLuint* indices = new GLuint[(width - 1) * (height - 1) * 6];
@@ -166,43 +173,33 @@ void Terrain::display()
 }
 
 float Terrain::getHeightOfGroundAtPosition(float x, float z) const {
-	// Apply scale, rotation, and translation transformations to the input coordinates
-	glm::vec4 transformedPosition = glm::vec4(x, 0.0f, z, 1.0f);
-	transformedPosition = glm::inverse(modelMatrix) * glm::inverse(viewMatrix) * transformedPosition;
+	// Convert x and z coordinates to terrain space
+	float terrainX = x / scaleMatrix[0][0];
+	float terrainZ = z / scaleMatrix[2][2];
 
-	// Extract transformed coordinates
-	float transformedTerrainX = transformedPosition.x;
-	float transformedTerrainZ = transformedPosition.z;
+	// Calculate grid indices
+	int x0 = static_cast<int>(floor(terrainX));
+	int z0 = static_cast<int>(floor(terrainZ));
 
-	// Scale the transformed coordinates to match the terrain dimensions
-	float scaledTerrainX = transformedTerrainX * scaleMatrix[0][0];
-	float scaledTerrainZ = transformedTerrainZ * scaleMatrix[2][2];
+	// Ensure indices are within valid range
+	x0 = glm::clamp(x0, 0, static_cast<int>(width) - 2);
+	z0 = glm::clamp(z0, 0, static_cast<int>(height) - 2);
 
-	// Calculate the indices of the surrounding vertices
-	int x0 = static_cast<int>(floor(scaledTerrainX));
-	int x1 = x0 + 1;
-	int z0 = static_cast<int>(floor(scaledTerrainZ));
-	int z1 = z0 + 1;
+	// Calculate fractional parts for interpolation
+	float xFraction = terrainX - static_cast<float>(x0);
+	float zFraction = terrainZ - static_cast<float>(z0);
 
-	// Ensure the indices are within valid range
-	x0 = glm::clamp(x0, 0, static_cast<int>(width) - 1);
-	x1 = glm::clamp(x1, 0, static_cast<int>(width) - 1);
-	z0 = glm::clamp(z0, 0, static_cast<int>(height) - 1);
-	z1 = glm::clamp(z1, 0, static_cast<int>(height) - 1);
+	// Perform bilinear interpolation to get the height
+	float height00 = heights[z0 * width + x0];
+	float height01 = heights[z0 * width + x0 + 1];
+	float height10 = heights[(z0 + 1) * width + x0];
+	float height11 = heights[(z0 + 1) * width + x0 + 1];
 
-	// Calculate the fractional parts for interpolation
-	float xFraction = scaledTerrainX - static_cast<float>(x0);
-	float zFraction = scaledTerrainZ - static_cast<float>(z0);
-
-	// Perform bilinear interpolation to calculate the height
-	float height00 = vertices[(z0 * width + x0) * 8 + 1];
-	float height01 = vertices[(z1 * width + x0) * 8 + 1];
-	float height10 = vertices[(z0 * width + x1) * 8 + 1];
-	float height11 = vertices[(z1 * width + x1) * 8 + 1];
-
-	float heightTop = glm::mix(height00, height01, zFraction);
-	float heightBottom = glm::mix(height10, height11, zFraction);
-	float interpolatedHeight = glm::mix(heightTop, heightBottom, xFraction);
+	std::cout << "height00: " << height00 << " height01: " << height01 << " height10: " << height10 << " height11: " << height11 << std::endl;
+	
+	float heightTop = glm::mix(height00, height01, xFraction);
+	float heightBottom = glm::mix(height10, height11, xFraction);
+	float interpolatedHeight = glm::mix(heightTop, heightBottom, zFraction);
 
 	return interpolatedHeight;
 }
