@@ -72,11 +72,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\d.harle\Documents\glm;C:\Users\d.harle\Documents\glew-2.1.0\include;C:\Users\d.harle\Documents\SFML-2.6.0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\d.harle\Documents\glew-2.1.0\lib\Release\x64;C:\Users\d.harle\Documents\SFML-2.6.0\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\d.harle\Documents\GitGaming\SHMUP-smfl\glm;C:\Users\d.harle\Documents\GitGaming\SHMUP-smfl\glew-2.1.0\include;C:\Users\d.harle\Documents\SFML-2.6.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\d.harle\Documents\GitGaming\SHMUP-smfl\glew-2.1.0\lib\Release\x64;C:\Users\d.harle\Documents\SFML-2.6.0\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\Users\d.harle\Documents\glm;C:\Users\d.harle\Documents\glew-2.1.0\include;C:\Users\d.harle\Documents\SFML-2.6.0\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\d.harle\Documents\GitGaming\SHMUP-smfl\glm;C:\Users\d.harle\Documents\GitGaming\SHMUP-smfl\glew-2.1.0\include;C:\Users\d.harle\Documents\SFML-2.6.0\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\d.harle\Documents\SFML-2.6.0\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -158,13 +158,21 @@
     <Content Include="Font\Raleway-ThinItalic.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="bmp.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Triangle2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bmp.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Triangle2D.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="img\heights.bmp" />
+    <Image Include="img\map.bmp" />
+    <Image Include="img\output-onlinebitmaptools.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -24,6 +24,9 @@
     <ClCompile Include="Triangle2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="bmp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -32,5 +35,22 @@
     <ClInclude Include="Triangle2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="bmp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="img\output-onlinebitmaptools.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\heights.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\map.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
