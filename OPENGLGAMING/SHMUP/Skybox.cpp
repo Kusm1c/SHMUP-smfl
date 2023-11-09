@@ -119,7 +119,7 @@ Skybox::Skybox(Camera camera)
 	glLinkProgram(shaderProgram);
 	glUseProgram(shaderProgram);
 
-	scaleMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+	scaleMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(10.0f, 10.0f, 10.0f));
 	projectionMatrix = glm::perspective(45.0f, 1.0f, 0.1f, 100.0f);
 	viewMatrix = glm::lookAt(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0));
 	modelMatrix = glm::mat4(1.0f) * scaleMatrix;
@@ -185,8 +185,15 @@ Skybox::~Skybox()
 	glDeleteVertexArrays(1, &vao);
 }
 
-void Skybox::Update()
+void Skybox::Update(float dt)
 {
+	glUseProgram(shaderProgram);
+	glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, &projectionMatrix[0][0]);
+	glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+	glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, &modelMatrix[0][0]);
+	glBindVertexArray(vao);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 }
 
 void Skybox::display()
@@ -194,6 +201,7 @@ void Skybox::display()
 	glDepthMask(GL_FALSE);
 	glUseProgram(shaderProgram);
 	glBindVertexArray(vao);
+	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 	glDepthMask(GL_TRUE);

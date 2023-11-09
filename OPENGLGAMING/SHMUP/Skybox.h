@@ -29,7 +29,7 @@ public:
 	Skybox(Camera camera);
 	~Skybox();
 
-	void Update();
+	void Update(float dt);
 	void display();
 
 	glm::mat4 modelMatrix = glm::mat4(1.0f);

@@ -240,6 +240,8 @@ Triangle2D::~Triangle2D()
     glDeleteShader(shaderVertexProgram);
     glDeleteBuffers(1, &vbo);
     glDeleteVertexArrays(1, &vao);
+    glDeleteTextures(1, &textureID);
+    glDeleteBuffers(1, &ibo);
 }
 
 void Triangle2D::Update(float dt)

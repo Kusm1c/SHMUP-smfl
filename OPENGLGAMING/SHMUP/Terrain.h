@@ -26,7 +26,7 @@ private:
     GLint positionAttrib;
     GLfloat* vertices;
     unsigned int width, height, width2, height2;
-    unsigned int textureID;
+    GLuint textureID;
 	
     glm::mat4 mvp = glm::mat4(1.0f);
 };

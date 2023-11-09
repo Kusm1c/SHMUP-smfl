@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Camera.h"
+#include "MiniMap.h"
 #include "Skybox.h"
 #include "Terrain.h"
 
@@ -19,10 +20,13 @@ int main()
 	glewExperimental = GL_TRUE;
 	glewInit();
 	// Triangle2D* triangle = new Triangle2D();
+
 	Terrain* scene = new Terrain();
 	scene->scaleMatrix = glm::scale(scene->scaleMatrix, glm::vec3(2.5f));
 
 	Skybox* skybox = new Skybox(camera);
+
+	MiniMap* minimap = new MiniMap();
 
 	while (window.isOpen())
 	{
@@ -58,11 +62,14 @@ int main()
 			camera.ProcessMouseMovement(0.0f, 10.0f);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
 			camera.ProcessMouseMovement(0.0f, -10.0f);
+
 		skybox->viewMatrix = camera.GetViewMatrix();
-		skybox->display();
 		scene->viewMatrix = camera.GetViewMatrix();
 		scene->Update(0.01f);
+		skybox->Update(0.01f);
+		skybox->display();
 		scene->display();
+		minimap->display();
 		window.display();
 	}
 

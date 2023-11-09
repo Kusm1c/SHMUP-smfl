@@ -15,7 +15,7 @@ Terrain::Terrain()
 	std::string heightMapPath = "img/heights.bmp";
 	std::string texturePath = "img/map.bmp";
 	unsigned char* heightMap = BMP::loadBMP_raw(heightMapPath.c_str(), width, height);
-	GLuint textureID = BMP::loadBMP_texture(texturePath.c_str(), width2, height2);
+	textureID = BMP::loadBMP_texture(texturePath.c_str(), width2, height2);
 	std::cout << width << " " << height << std::endl;
 	std::cout << width2 << " " << height2 << std::endl;
 
@@ -154,14 +154,23 @@ void Terrain::Update(float dt)
 	modelMatrix = translationMatrix * rotationMatrix * scaleMatrix;
 	mvp = projectionMatrix * viewMatrix * modelMatrix;
 	glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "mvp"), 1, GL_FALSE, &mvp[0][0]);
+	/*glBindVertexArray(vao);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+	glBindTexture(GL_TEXTURE_2D, textureID);
+	glUseProgram(shaderProgram);
+	glEnable(GL_DEPTH_TEST);
+	glActiveTexture(GL_TEXTURE0);
+	glUniform1i(glGetUniformLocation(shaderProgram, "textureSampler"), 0);*/
 }
 
 void Terrain::display()
 {
 	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//glEnable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);
 	glUseProgram(shaderProgram);
-	glBindTexture(GL_TEXTURE_2D, textureID);
 	glBindVertexArray(vao);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, textureID);
 	glDrawElements(GL_TRIANGLES, 1022 * 1022 * 6, GL_UNSIGNED_INT, 0);
 }
