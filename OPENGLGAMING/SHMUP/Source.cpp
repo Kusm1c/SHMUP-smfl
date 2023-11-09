@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Camera.h"
-#include "Player.h"
+#include "Skybox.h"
 #include "Terrain.h"
 
 int main()
@@ -20,8 +20,9 @@ int main()
 	glewInit();
 	// Triangle2D* triangle = new Triangle2D();
 	Terrain* scene = new Terrain();
-	Player player(glm::vec3(0.0f, 1.0f, 3.0f), 0.1f);
 	scene->scaleMatrix = glm::scale(scene->scaleMatrix, glm::vec3(2.5f));
+
+	Skybox* skybox = new Skybox(camera);
 
 	while (window.isOpen())
 	{
@@ -32,6 +33,10 @@ int main()
 				sf::Event::Closed)
 				window.close();
 		}
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		
+
 		camera.ProcessKeyboard(FORWARD, 0.001f);
 		// if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z))
 		// 	camera.ProcessKeyboard(FORWARD, 0.01f);
@@ -53,12 +58,8 @@ int main()
 			camera.ProcessMouseMovement(0.0f, 10.0f);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
 			camera.ProcessMouseMovement(0.0f, -10.0f);
-
-		player.position = camera.Position;
-
-		if (player.checkCollision(*scene)) {
-			std::cout << "Death!" << std::endl;
-		}
+		skybox->viewMatrix = camera.GetViewMatrix();
+		skybox->display();
 		scene->viewMatrix = camera.GetViewMatrix();
 		scene->Update(0.01f);
 		scene->display();

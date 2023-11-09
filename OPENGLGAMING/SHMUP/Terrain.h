@@ -9,14 +9,12 @@ public:
     ~Terrain();
     void Update(float dt);
     void display();
-    float getHeightOfGroundAtPosition(float x, float z) const;
     glm::mat4 viewMatrix = glm::mat4(1.0f);
     glm::mat4 translationMatrix = glm::mat4(1.0f);
     glm::mat4 rotationMatrix = glm::mat4(1.0f);
     glm::mat4 scaleMatrix = glm::mat4(1.0f);
     glm::mat4 modelMatrix = glm::mat4(1.0f);
     glm::mat4 projectionMatrix = glm::mat4(1.0f);
-    std::vector<int> heights;
 
 private:
     GLuint vao;

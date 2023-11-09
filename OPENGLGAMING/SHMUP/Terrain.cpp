@@ -40,15 +40,6 @@ Terrain::Terrain()
 		}
 	}
 
-	for (unsigned int i = 0; i < width; i++)
-	{
-		for (unsigned int j = 0; j < height; j++)
-		{
-			heights.push_back(vertices[(j * width + (width - i - 1)) * 8 + 1]);
-		}
-	}
-
-
 	GLuint* indices = new GLuint[(width - 1) * (height - 1) * 6];
 	for (unsigned int i = 0; i < width - 1; i++)
 	{
@@ -167,39 +158,10 @@ void Terrain::Update(float dt)
 
 void Terrain::display()
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glEnable(GL_DEPTH_TEST);
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//glEnable(GL_DEPTH_TEST);
+	glUseProgram(shaderProgram);
+	glBindTexture(GL_TEXTURE_2D, textureID);
+	glBindVertexArray(vao);
 	glDrawElements(GL_TRIANGLES, 1022 * 1022 * 6, GL_UNSIGNED_INT, 0);
-}
-
-float Terrain::getHeightOfGroundAtPosition(float x, float z) const {
-	// Convert x and z coordinates to terrain space
-	float terrainX = x / scaleMatrix[0][0];
-	float terrainZ = z / scaleMatrix[2][2];
-
-	// Calculate grid indices
-	int x0 = static_cast<int>(floor(terrainX));
-	int z0 = static_cast<int>(floor(terrainZ));
-
-	// Ensure indices are within valid range
-	x0 = glm::clamp(x0, 0, static_cast<int>(width) - 2);
-	z0 = glm::clamp(z0, 0, static_cast<int>(height) - 2);
-
-	// Calculate fractional parts for interpolation
-	float xFraction = terrainX - static_cast<float>(x0);
-	float zFraction = terrainZ - static_cast<float>(z0);
-
-	// Perform bilinear interpolation to get the height
-	float height00 = heights[z0 * width + x0];
-	float height01 = heights[z0 * width + x0 + 1];
-	float height10 = heights[(z0 + 1) * width + x0];
-	float height11 = heights[(z0 + 1) * width + x0 + 1];
-
-	std::cout << "height00: " << height00 << " height01: " << height01 << " height10: " << height10 << " height11: " << height11 << std::endl;
-	
-	float heightTop = glm::mix(height00, height01, xFraction);
-	float heightBottom = glm::mix(height10, height11, xFraction);
-	float interpolatedHeight = glm::mix(heightTop, heightBottom, zFraction);
-
-	return interpolatedHeight;
 }
